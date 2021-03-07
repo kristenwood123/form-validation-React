@@ -1,13 +1,16 @@
 import React from 'react'
 import '../index.css'
+import useForm from './useForm'
+import validateInfo from './validateInfo'
 
 
-const Signup = ({values, handleChange}) => {
- 
+
+const Signup = () => {
+ const { handleChange, values, handleSubmit, errors } = useForm(validateInfo);
 
   return (
     <div className='signup'>
-      <form className='signup__form='>
+      <form className='signup__form=' onSubmit={handleSubmit}>
         <h1>Get started today!</h1>
         <div className="signup__input">
           <label htmlFor="username" className='signup__label'></label>
@@ -21,6 +24,7 @@ const Signup = ({values, handleChange}) => {
             value={values.username}
             onChange={handleChange}
             />
+            {errors.username && <p>{errors.username}</p>}
         </div>
           <div className="signup__input">
           <label htmlFor="email" className='signup__label'>Email</label>
@@ -34,7 +38,7 @@ const Signup = ({values, handleChange}) => {
             onChange={handleChange}
             />
             <div className="signup__input">
-              <label htmlFor="password"               className='signup__label'>Password</label>
+              <label htmlFor="password" className='signup__label'>Password</label>
               <input 
                 id='password'
                 type="password" 
@@ -57,7 +61,9 @@ const Signup = ({values, handleChange}) => {
                 onChange={handleChange}
                 />
           </div>
-          <button className='signup__btn' type='submit'>Sign Up</button>
+          <button 
+            className='signup__btn' 
+            type='submit' >Sign Up</button>
           <span className='signup__input-login'>Already have an account? Login <a href="#">Here</a></span>
         </div>
       </form>
