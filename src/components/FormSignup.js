@@ -1,8 +1,10 @@
 import React from 'react'
 import UseForm from './UseForm'
+import validate from './Validation'
 
-const Form = () => {
-  const { handleChange, values, handleSubmit } = UseForm()
+const FormSignup = () => {
+  const { handleChange, values, handleSubmit, errors } = UseForm(validate)
+  
   return (
     <div className='form-container'>
       <h1>Get Started Today!</h1>
@@ -61,4 +63,4 @@ const Form = () => {
   )
 }
 
-export default Form
+export default FormSignup
