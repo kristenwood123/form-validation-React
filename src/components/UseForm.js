@@ -1,39 +1,30 @@
-import { useState, useEffect } from 'react'
-import validateInfo from './validateInfo'
+import React, { useState } from 'react'
 
-const useForm = (callback, validateInfo) => {
-  const [values, setValues] = useState({
-    username: '',
-    email: '',
-    password: '',
-    passwordConfirm: ''
+const UseForm = () => {
+    const [values, setValues] = useState({
+      username: '',
+      email: '',
+      password: '',
+      passwordConfirm: ''
   })
 
   const [errors, setErrors] = useState({values})
-  const [submitting, setSubmitting] = useState(false)
-  
 
   const handleChange = e => {
-    const { name, value } = e.target;
-    setValues(
-      {...values, [name]: value }
-      )
+    const {name, value} = e.target
+    setValues({
+       ...values, [name]: value
+    })
   }
-
 
   const handleSubmit = e => {
-    e.preventDefault();
-    setErrors(validateInfo(values))
-    setSubmitting(true)
+    e.preventDefault()
+
   }
+ 
 
-  useEffect(() => {
-    if(Object.keys(errors).length === 0 && submitting) {
-      callback();
-    }
-  })
 
-  return { handleChange, values, handleSubmit, errors }
+  return { handleChange, values, errors, handleSubmit }
 }
 
-export default useForm
+export default UseForm
